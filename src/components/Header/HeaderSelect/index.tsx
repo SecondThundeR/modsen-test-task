@@ -1,9 +1,9 @@
 import { ChangeEvent } from "react";
-import { OptionItem } from "../../../types/optionItem";
+import { OptionItemArrayType } from "../../../schemas/optionItem";
 
 interface HeaderSelectProps {
   label: string;
-  options: OptionItem[];
+  options: OptionItemArrayType;
   value: string;
   onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
