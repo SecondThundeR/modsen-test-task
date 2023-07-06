@@ -9,7 +9,7 @@ import { HeaderSelect } from "./HeaderSelect";
 export function Header({ children }: PropsWithChildren) {
   return (
     <div className="bg-base-300">
-      <div className="container mx-auto py-8 flex flex-col justify-center items-center gap-4">{children}</div>
+      <header className="container mx-auto py-8 flex flex-col justify-center items-center gap-4">{children}</header>
     </div>
   );
 }
