@@ -8,13 +8,13 @@ interface BookCardProps {
 function EmptyCover() {
   return (
     <div className="w-36 h-52 bg-base-content flex items-center justify-center">
-      <h1 className="text-base-300 text-xl">{"No cover :("}</h1>
+      <h1 className="text-base-300 text-xl">No cover</h1>
     </div>
   );
 }
 
 export default function BookCard({ imageUrl, categories, title, authors }: BookCardProps) {
-  const firstCategory = categories !== undefined && categories !== null ? categories[0] : "Unknown category";
+  const firstCategory = categories?.[0] || "Unknown category";
   const authorsInfo = authors.join(", ");
 
   return (
