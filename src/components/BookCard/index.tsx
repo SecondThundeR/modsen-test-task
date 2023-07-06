@@ -1,6 +1,6 @@
 interface BookCardProps {
   imageUrl: string | undefined;
-  category: string;
+  categories?: string[] | null;
   title: string;
   authors: string[];
 }
@@ -13,14 +13,17 @@ function EmptyCover() {
   );
 }
 
-export default function BookCard({ imageUrl, category, title, authors }: BookCardProps) {
+export default function BookCard({ imageUrl, categories, title, authors }: BookCardProps) {
+  const firstCategory = categories !== undefined && categories !== null ? categories[0] : "Unknown category";
+  const authorsInfo = authors.join(", ");
+
   return (
     <div className="min-h-16 w-72 aspect-auto rounded-xl bg-base-200 flex flex-col gap-4 px-4 py-6 items-center">
       {imageUrl !== undefined ? <img className="w-36 h-52 shadow-2xl" src={imageUrl} /> : <EmptyCover />}
       <div className="flex flex-col items-start w-full gap-1">
-        <a className="link link-primary">{category}</a>
+        <a className="link link-primary">{firstCategory}</a>
         <h1 className="font-bold text-xl">{title}</h1>
-        <p className="opacity-50">{authors.join(", ")}</p>
+        <p className="opacity-50">{authorsInfo}</p>
       </div>
     </div>
   );
