@@ -10,7 +10,7 @@ import BookCard from "./components/BookCard";
 
 import { VolumesSchema } from "./schemas/api/volumes";
 
-const MAX_RESULTS = 40;
+const MAX_RESULTS = 30;
 
 const fetchBooks = async (page: number = 0, search: string, category: string, sorting: string) => {
   const res = await axios.get("https://www.googleapis.com/books/v1/volumes", {
