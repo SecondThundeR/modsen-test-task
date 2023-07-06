@@ -5,8 +5,8 @@ import { useQuery } from "react-query";
 import { categories } from "./data/categories";
 import { sorting } from "./data/sorting";
 
-import Header from "./components/Header";
-import BookCard from "./components/BookCard";
+import { Header } from "./components/Header";
+import { BookCard } from "./components/BookCard";
 
 import { VolumesSchema } from "./schemas/api/volumes";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";

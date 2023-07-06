@@ -1,13 +1,13 @@
-import { ChangeEvent, FormEvent } from "react";
+import { HTMLAttributes } from "react";
 
-interface HeaderSearchProps {
+interface HeaderSearchProps
+  extends Pick<HTMLAttributes<HTMLInputElement>, "onChange">,
+    Pick<HTMLAttributes<HTMLFormElement>, "onSubmit"> {
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   isLoading: boolean;
 }
 
-export default function HeaderSearch({ value, onChange, onSubmit, isLoading }: HeaderSearchProps) {
+export function HeaderSearch({ value, onChange, onSubmit, isLoading }: HeaderSearchProps) {
   return (
     <form className="join" onSubmit={onSubmit}>
       <input

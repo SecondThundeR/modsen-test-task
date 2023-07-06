@@ -1,14 +1,13 @@
-import { ChangeEvent } from "react";
+import { HTMLAttributes } from "react";
 import { OptionItemArrayType } from "../../../schemas/optionItem";
 
-interface HeaderSelectProps {
+interface HeaderSelectProps extends Pick<HTMLAttributes<HTMLSelectElement>, "onChange"> {
   label: string;
   options: OptionItemArrayType;
   value: string;
-  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export default function HeaderSelect({ label, options, value, onChange }: HeaderSelectProps) {
+export function HeaderSelect({ label, options, value, onChange }: HeaderSelectProps) {
   return (
     <div className="form-control grow">
       <label className="label">

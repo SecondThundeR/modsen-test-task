@@ -13,7 +13,7 @@ function EmptyCover() {
   );
 }
 
-export default function BookCard({ imageUrl, categories, title, authors }: BookCardProps) {
+export function BookCard({ imageUrl, categories, title, authors }: BookCardProps) {
   const firstCategory = categories?.[0] || "Unknown category";
   const authorsInfo = authors.join(", ");
 
