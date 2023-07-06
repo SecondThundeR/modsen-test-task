@@ -9,8 +9,11 @@ import Header from "./components/Header";
 import BookCard from "./components/BookCard";
 
 import { VolumesSchema } from "./schemas/api/volumes";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 const MAX_RESULTS = 30;
+const ALERT_TEXT =
+  "If you're sure the items should have appeared, try loading the page with a VPN, as the Google Books API may not show results in some regions (unfortunately)";
 
 const fetchBooks = async (page: number = 0, search: string, category: string, sorting: string) => {
   const res = await axios.get("https://www.googleapis.com/books/v1/volumes", {
@@ -78,7 +81,15 @@ function App() {
           <span className="loading loading-spinner loading-md"></span>
         ) : data ? (
           <>
-            <h1 className="font-medium opacity-50">Found {data?.totalItems} results</h1>
+            <div className="flex flex-col sm:w-1/3 gap-4 items-center">
+              <h1 className="font-medium opacity-50">Found {data?.totalItems} results</h1>
+              {data.totalItems === 0 && (
+                <div className="alert alert-info">
+                  <InformationCircleIcon className="h-6 w-6 stroke-current shrink-0" />
+                  <span>{ALERT_TEXT}</span>
+                </div>
+              )}
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {data !== undefined &&
                 data.items?.map((item) => {
