@@ -1,21 +1,24 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 interface HeaderSearchProps {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  // onClick
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  isLoading: boolean;
 }
 
-export default function HeaderSearch({ value, onChange }: HeaderSearchProps) {
+export default function HeaderSearch({ value, onChange, onSubmit, isLoading }: HeaderSearchProps) {
   return (
-    <div className="join">
+    <form className="join" onSubmit={onSubmit}>
       <input
         className="input input-bordered join-item w-full"
         placeholder="Enter book name"
         value={value}
         onChange={onChange}
       />
-      <button className="btn btn-primary join-item">Search</button>
-    </div>
+      <button type="submit" className="btn btn-primary join-item" disabled={value.length === 0 || isLoading}>
+        Search
+      </button>
+    </form>
   );
 }
