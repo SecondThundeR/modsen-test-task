@@ -1,26 +1,25 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import axios from "axios";
 import { useQuery } from "react-query";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
+
+import { BookCard } from "./components/BookCard";
+import { Header } from "./components/Header";
 
 import { categories } from "./data/categories";
 import { sorting } from "./data/sorting";
 
-import { Header } from "./components/Header";
-import { BookCard } from "./components/BookCard";
-
 import { VolumesSchema } from "./schemas/api/volumes";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
-const MAX_RESULTS = 30;
 const ALERT_TEXT =
   "If you're sure the items should have appeared, try loading the page with a VPN, as the Google Books API may not show results in some regions (unfortunately)";
 
 const fetchBooks = async (page: number = 0, search: string, category: string, sorting: string) => {
-  const res = await axios.get("https://www.googleapis.com/books/v1/volumes", {
+  const res = await axios.get(import.meta.env.VITE_BOOKS_API_URL, {
     params: {
       q: category !== "all" ? `${search}+subject:${category}` : search,
-      maxResults: MAX_RESULTS,
-      startIndex: MAX_RESULTS * page,
+      maxResults: import.meta.env.VITE_BOOKS_MAX_RESULTS,
+      startIndex: import.meta.env.VITE_BOOKS_MAX_RESULTS * page,
       orderBy: sorting,
       key: import.meta.env.VITE_BOOKS_API_KEY,
     },
