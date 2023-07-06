@@ -1,6 +1,5 @@
 import { ChangeEvent, useState } from "react";
 import axios from "axios";
-import { createZodFetcher } from "zod-fetch";
 
 import { categories } from "./data/categories";
 import { sorting } from "./data/sorting";
@@ -9,18 +8,15 @@ import Header from "./components/Header";
 import { VolumesSchema } from "./schemas/api/volumes";
 import { useQuery } from "react-query";
 
-const fetcher = createZodFetcher(axios.get);
-
 const fetchBooks = async () => {
-  console.log(import.meta.env.GOOGLE_BOOKS_API_KEY);
-  return await fetcher(VolumesSchema, "/volumes", {
+  const res = await axios.get("https://www.googleapis.com/books/v1/volumes", {
     params: {
       q: "javascript",
-      key: import.meta.env.GOOGLE_BOOKS_API_KEY,
       maxResults: 40,
+      key: import.meta.env.VITE_BOOKS_API_KEY,
     },
-    baseURL: "https://www.googleapis.com/books/v1",
   });
+  return VolumesSchema.parseAsync(res.data);
 };
 
 function App() {
