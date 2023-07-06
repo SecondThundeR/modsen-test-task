@@ -1,5 +1,7 @@
 # Практическое задание JS (TS) / React
 
+> Demo: <https://modsen-test-task.vercel.app/>
+
 ## Задание
 
 Необходимо разработать React-приложение поиска книг с помощью Google Books API: [Документация](https://developers.google.com/books/docs/v1/using)
