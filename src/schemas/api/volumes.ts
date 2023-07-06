@@ -6,7 +6,7 @@ const VolumeInfoSchema = z.object({
   authors: z.array(z.string()),
   publisher: z.string().nullish(),
   publishedDate: z.string(),
-  description: z.string(),
+  description: z.string().nullish(),
   industryIdentifiers: z
     .array(
       z.object({
@@ -21,7 +21,7 @@ const VolumeInfoSchema = z.object({
   }),
   pageCount: z.number().nullish(),
   printType: z.string(),
-  categories: z.array(z.string()),
+  categories: z.array(z.string()).nullish(),
   averageRating: z.number().optional(),
   ratingsCount: z.number().optional(),
   maturityRating: z.string(),
@@ -33,10 +33,12 @@ const VolumeInfoSchema = z.object({
       containsImageBubbles: z.boolean(),
     })
     .nullish(),
-  imageLinks: z.object({
-    smallThumbnail: z.string(),
-    thumbnail: z.string(),
-  }),
+  imageLinks: z
+    .object({
+      smallThumbnail: z.string(),
+      thumbnail: z.string(),
+    })
+    .nullish(),
   language: z.string(),
   previewLink: z.string(),
   infoLink: z.string(),
@@ -78,7 +80,7 @@ const VolumesItemSchema = z.object({
   volumeInfo: VolumeInfoSchema.nullish(),
   saleInfo: SaleInfoSchema,
   accessInfo: AccessInfoSchema,
-  searchInfo: SearchInfoSchema,
+  searchInfo: SearchInfoSchema.nullish(),
 });
 
 export const VolumesSchema = z.object({
