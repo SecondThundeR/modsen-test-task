@@ -2,33 +2,37 @@ import { z } from "zod";
 
 const VolumeInfoSchema = z.object({
   title: z.string(),
-  subtitle: z.string(),
+  subtitle: z.string().optional(),
   authors: z.array(z.string()),
-  publisher: z.string(),
+  publisher: z.string().nullish(),
   publishedDate: z.string(),
   description: z.string(),
-  industryIdentifiers: z.array(
-    z.object({
-      type: z.string(),
-      identifier: z.string(),
-    }),
-  ),
+  industryIdentifiers: z
+    .array(
+      z.object({
+        type: z.string(),
+        identifier: z.string(),
+      }),
+    )
+    .nullish(),
   readingModes: z.object({
     text: z.boolean(),
     image: z.boolean(),
   }),
-  pageCount: z.number(),
+  pageCount: z.number().nullish(),
   printType: z.string(),
   categories: z.array(z.string()),
-  averageRating: z.number(),
-  ratingsCount: z.number(),
+  averageRating: z.number().optional(),
+  ratingsCount: z.number().optional(),
   maturityRating: z.string(),
   allowAnonLogging: z.boolean(),
   contentVersion: z.string(),
-  panelizationSummary: z.object({
-    containsEpubBubbles: z.boolean(),
-    containsImageBubbles: z.boolean(),
-  }),
+  panelizationSummary: z
+    .object({
+      containsEpubBubbles: z.boolean(),
+      containsImageBubbles: z.boolean(),
+    })
+    .nullish(),
   imageLinks: z.object({
     smallThumbnail: z.string(),
     thumbnail: z.string(),
@@ -71,16 +75,16 @@ const VolumesItemSchema = z.object({
   id: z.string(),
   etag: z.string(),
   selfLink: z.string(),
-  volumeInfo: VolumeInfoSchema,
+  volumeInfo: VolumeInfoSchema.nullish(),
   saleInfo: SaleInfoSchema,
   accessInfo: AccessInfoSchema,
   searchInfo: SearchInfoSchema,
 });
 
 export const VolumesSchema = z.object({
-  kind: z.string(),
-  totalItems: z.number(),
-  items: VolumesItemSchema.array().optional(),
+  kind: z.string().nullish(),
+  totalItems: z.number().nullish(),
+  items: VolumesItemSchema.array().nullish(),
 });
 
 export type VolumesType = z.infer<typeof VolumesSchema>;
