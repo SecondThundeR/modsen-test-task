@@ -4,5 +4,9 @@ export default {
   theme: {
     extend: {},
   },
+  daisyui: {
+    themes: ["autumn", "night"],
+    darkTheme: "night",
+  },
   plugins: [require("daisyui")],
 };
