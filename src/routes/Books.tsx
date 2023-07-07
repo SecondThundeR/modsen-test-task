@@ -3,12 +3,11 @@ import { useQuery, useQueryClient } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
-import { BookCard } from "../components/BookCard";
-
 import { ALERT_TEXT } from "../constants/alertText";
 
 import { fetchBooks } from "../services/api/fetchBooks";
 import { Spinner } from "../components/Spinner";
+import { CardGrid } from "../components/CardGrid";
 
 export function Books() {
   const [searchParams, _] = useSearchParams();
@@ -54,25 +53,7 @@ export function Books() {
           </div>
         )}
       </div>
-      {data && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {data.items?.map((item) => {
-            const volumeInfo = item.volumeInfo;
-            if (volumeInfo === undefined || volumeInfo === null) return null;
-            const { imageLinks, title, categories, authors } = volumeInfo;
-            return (
-              <BookCard
-                key={item.id}
-                id={item.id}
-                imageUrl={imageLinks?.smallThumbnail}
-                title={title}
-                categories={categories}
-                authors={authors}
-              />
-            );
-          })}
-        </div>
-      )}
+      {data && <CardGrid cards={data.items} />}
     </>
   );
 }

@@ -17,6 +17,7 @@ export function CardGrid({ cards }: CardGridProps) {
         return (
           <BookCard
             key={card.id}
+            id={card.id}
             imageUrl={imageLinks?.smallThumbnail}
             title={title}
             categories={categories}
