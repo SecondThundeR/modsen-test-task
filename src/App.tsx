@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import { Books } from "./routes/Books";
 import { Error } from "./routes/Error";
+import { NotFound } from "./routes/NotFound";
 import { Root } from "./routes/Root";
 import { RootHint } from "./routes/RootHint";
 
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Books />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
