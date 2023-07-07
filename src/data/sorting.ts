@@ -1,6 +1,6 @@
 import { OptionItemArrayType } from "../schemas/optionItem";
 
-export const sorting = [
+export const SORTING = [
   {
     id: 1,
     value: "relevance",

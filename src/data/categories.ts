@@ -1,6 +1,6 @@
 import { OptionItemArrayType } from "../schemas/optionItem";
 
-export const categories = [
+export const CATEGORIES = [
   {
     id: 1,
     value: "all",
