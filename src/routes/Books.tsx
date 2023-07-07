@@ -21,12 +21,13 @@ export function Books() {
   const currentPage = searchParams.get("page");
   const isMissingParameters = !searchQuery || !selectedCategory || !selectedSort || !currentPage;
 
-  const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
-    queryKey: ["books"],
-    queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
-    getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
-    enabled: !isMissingParameters,
-  });
+  const { data, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+    useInfiniteQuery({
+      queryKey: ["books"],
+      queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
+      getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
+      enabled: !isMissingParameters,
+    });
 
   // Idk, but Google Books API returns different "totalItems" on pagination
   // Returning latest result for now
@@ -44,9 +45,9 @@ export function Books() {
     };
   }, [searchQuery, selectedCategory, selectedSort]);
 
-  if (status === "error") return <h1 className="text-error text-bold text-xl">Something wrong happened! Try again</h1>;
+  if (isError) return <h1 className="text-error text-bold text-xl">Something wrong happened! Try again</h1>;
 
-  if (status === "loading") return <Spinner />;
+  if (isLoading || (!isFetchingNextPage && isRefetching)) return <Spinner />;
 
   return (
     <>
