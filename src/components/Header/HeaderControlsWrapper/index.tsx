@@ -4,7 +4,7 @@ interface HeaderControlsWrapperProps extends PropsWithChildren, Pick<HTMLAttribu
 
 export function HeaderControlsWrapper({ children, onSubmit }: HeaderControlsWrapperProps) {
   return (
-    <div className="flex flex-col sm:w-2/5 gap-2">
+    <div className="flex flex-col sm:w-3/5 gap-2">
       <form onSubmit={onSubmit}>{children}</form>
     </div>
   );
