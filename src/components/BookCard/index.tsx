@@ -22,7 +22,7 @@ export function BookCard({ imageUrl, categories, title, authors }: BookCardProps
       {imageUrl ? <img className="w-36 h-52 shadow-2xl" src={imageUrl} /> : <EmptyCover />}
       <div className="flex flex-col items-start w-full gap-1">
         <a className="link link-primary">{firstCategory}</a>
-        <h1 className="font-bold text-xl">{title}</h1>
+        <h1 className="font-bold text-xl line-clamp-2">{title}</h1>
         <p className="opacity-50">{authorsInfo}</p>
       </div>
     </div>
