@@ -1,24 +1,30 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useEffect, useState } from "react";
 
-interface HeaderSearchProps
-  extends Pick<HTMLAttributes<HTMLInputElement>, "onChange">,
-    Pick<HTMLAttributes<HTMLFormElement>, "onSubmit"> {
-  value: string;
+interface HeaderSearchProps extends Pick<HTMLAttributes<HTMLInputElement>, "defaultValue"> {
   isLoading: boolean;
 }
 
-export function HeaderSearch({ value, onChange, onSubmit, isLoading }: HeaderSearchProps) {
+export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
+  const [isEmpty, setIsEmpty] = useState(true);
+
+  useEffect(() => {
+    if (defaultValue) setIsEmpty(false);
+  }, []);
+
   return (
-    <form className="join" onSubmit={onSubmit}>
+    <div className="join w-full">
       <input
+        id="q"
+        name="q"
+        type="text"
+        onChange={(e) => setIsEmpty(e.target.value === "")}
         className="input input-bordered join-item w-full"
         placeholder="Enter book name"
-        value={value}
-        onChange={onChange}
+        defaultValue={defaultValue}
       />
-      <button type="submit" className="btn btn-primary join-item" disabled={value.length === 0 || isLoading}>
+      <button type="submit" className="btn btn-primary join-item" disabled={isEmpty || isLoading}>
         Search
       </button>
-    </form>
+    </div>
   );
 }
