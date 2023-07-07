@@ -1,16 +1,17 @@
 import { useEffect } from "react";
-import { useQuery, useQueryClient } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
+
+import { CardGrid } from "../components/CardGrid";
+import { Spinner } from "../components/Spinner";
 
 import { ALERT_TEXT } from "../constants/alertText";
 
 import { fetchBooks } from "../services/api/fetchBooks";
-import { Spinner } from "../components/Spinner";
-import { CardGrid } from "../components/CardGrid";
 
 export function Books() {
-  const [searchParams, _] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -20,11 +21,16 @@ export function Books() {
   const currentPage = searchParams.get("page");
   const isMissingParameters = !searchQuery || !selectedCategory || !selectedSort || !currentPage;
 
-  const { data, isError, isLoading, isRefetching, refetch } = useQuery({
+  const { data, status, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } = useInfiniteQuery({
     queryKey: ["books"],
-    queryFn: () => fetchBooks(searchQuery, selectedCategory, selectedSort, currentPage),
+    queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
+    getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
     enabled: !isMissingParameters,
   });
+
+  // Idk, but Google Books API returns different "totalItems" on pagination
+  // Returning latest result for now
+  const resultsCount = data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) || 0;
 
   useEffect(() => {
     if (isMissingParameters) navigate("/");
@@ -38,22 +44,34 @@ export function Books() {
     };
   }, [searchQuery, selectedCategory, selectedSort]);
 
-  if (isError) return <h1 className="text-error text-bold text-xl">Something wrong happened! Try again</h1>;
+  if (status === "error") return <h1 className="text-error text-bold text-xl">Something wrong happened! Try again</h1>;
 
-  if (isLoading || isRefetching) return <Spinner />;
+  if (status === "loading") return <Spinner />;
 
   return (
     <>
-      <div className="flex flex-col sm:w-1/3 gap-4 items-center">
-        <h1 className="font-medium opacity-50">Found {data?.totalItems} results</h1>
-        {data?.totalItems === 0 && (
+      <div className="flex flex-col gap-4 items-center w-full">
+        <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
+        {resultsCount === 0 && (
           <div className="alert alert-info">
             <InformationCircleIcon className="h-6 w-6 stroke-current shrink-0" />
             <span>{ALERT_TEXT}</span>
           </div>
         )}
+        {data && <CardGrid pages={data.pages} />}
+        <button
+          className="btn btn-primary"
+          disabled={!hasNextPage || isFetchingNextPage}
+          onClick={() => {
+            const updatedSearchParams = new URLSearchParams(searchParams.toString());
+            updatedSearchParams.set("page", String(Number(currentPage) + 1));
+            setSearchParams(updatedSearchParams.toString());
+            fetchNextPage();
+          }}
+        >
+          {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+        </button>
       </div>
-      {data && <CardGrid cards={data.items} />}
     </>
   );
 }
