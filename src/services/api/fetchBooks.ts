@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { DEFAULT_SEARCH_PARAMETERS } from "../../data/defaultSearchParams";
+import { DEFAULT_SEARCH_PARAMETERS } from "../../constants/defaultSearchParams";
 
 import { VolumesSchema } from "../../schemas/api/volumes";
 
