@@ -29,7 +29,7 @@ export function BookCard({ id, imageUrl, categories, title, authors }: BookCardP
       <div className="flex flex-col items-start w-full gap-1">
         <p className="link link-primary">{firstCategory}</p>
         <h1 className="font-bold text-xl line-clamp-1">{title}</h1>
-        <p className="opacity-50">{authorsInfo}</p>
+        <p className="opacity-50 line-clamp-2">{authorsInfo}</p>
       </div>
     </Link>
   );
