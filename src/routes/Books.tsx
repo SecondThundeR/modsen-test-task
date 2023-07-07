@@ -63,6 +63,7 @@ export function Books() {
             return (
               <BookCard
                 key={item.id}
+                id={item.id}
                 imageUrl={imageLinks?.smallThumbnail}
                 title={title}
                 categories={categories}
