@@ -20,7 +20,7 @@ export function CardGrid({ pages }: CardGridProps) {
         const { imageLinks, title, categories, authors } = volumeInfo;
         return (
           <BookCard
-            key={item.id}
+            key={item.etag}
             id={item.id}
             imageUrl={imageLinks?.smallThumbnail}
             title={title}
