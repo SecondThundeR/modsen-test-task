@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import { useIsFetching } from "react-query";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
 import { Header } from "../components/Header";
@@ -13,6 +14,7 @@ const DEFAULT_SORT = DEFAULT_SEARCH_PARAMETERS["sorting"];
 export function Root() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const isFetchingBooks = useIsFetching({ queryKey: ["books"] });
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -31,7 +33,7 @@ export function Root() {
       <Header>
         <Header.Title>Search for books</Header.Title>
         <Header.ControlsWrapper onSubmit={onSubmit}>
-          <Header.Search defaultValue={searchParams.get("q") || ""} isLoading={false} />
+          <Header.Search defaultValue={searchParams.get("q") || ""} isLoading={isFetchingBooks > 0} />
           <Header.SelectWrapper>
             <Header.Select
               name="categories"
