@@ -4,7 +4,7 @@ interface BookCardProps {
   id: string;
   imageUrl: string | undefined;
   categories?: string[] | null;
-  title: string;
+  title?: string | null;
   authors?: string[] | null;
 }
 
@@ -17,8 +17,8 @@ function EmptyCover() {
 }
 
 export function BookCard({ id, imageUrl, categories, title, authors }: BookCardProps) {
-  const firstCategory = categories?.[0] || "";
-  const authorsInfo = authors?.join(", ") || "";
+  const firstCategory = categories?.[0] || null;
+  const authorsInfo = authors?.join(", ") || null;
 
   return (
     <Link
