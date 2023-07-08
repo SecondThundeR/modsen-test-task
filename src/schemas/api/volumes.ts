@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const VolumeInfoSchema = z.object({
-  title: z.string(),
-  subtitle: z.string().optional(),
+  title: z.string().nullish(),
+  subtitle: z.string().nullish(),
   authors: z.array(z.string()).nullish(),
   publisher: z.string().nullish(),
   publishedDate: z.string().nullish(),
@@ -22,8 +22,8 @@ const VolumeInfoSchema = z.object({
   pageCount: z.number().nullish(),
   printType: z.string(),
   categories: z.array(z.string()).nullish(),
-  averageRating: z.number().optional(),
-  ratingsCount: z.number().optional(),
+  averageRating: z.number().nullish(),
+  ratingsCount: z.number().nullish(),
   maturityRating: z.string(),
   allowAnonLogging: z.boolean(),
   contentVersion: z.string(),
