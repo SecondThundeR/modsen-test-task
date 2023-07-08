@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { InformationCircleIcon } from "@heroicons/react/24/outline";
 
 import { CardGrid } from "../components/CardGrid";
 import { Spinner } from "../components/Spinner";
