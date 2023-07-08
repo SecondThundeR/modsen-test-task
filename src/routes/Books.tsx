@@ -9,6 +9,7 @@ import { Spinner } from "../components/Spinner";
 import { ALERT_TEXT } from "../constants/alertText";
 
 import { fetchBooks } from "../services/api/fetchBooks";
+import { Alert } from "../components/Alert";
 
 export function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -53,12 +54,7 @@ export function Books() {
     <>
       <div className="flex flex-col gap-4 items-center w-full">
         <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
-        {resultsCount === 0 && (
-          <div className="alert alert-info">
-            <InformationCircleIcon className="h-6 w-6 stroke-current shrink-0" />
-            <span>{ALERT_TEXT}</span>
-          </div>
-        )}
+        {resultsCount === 0 && <Alert>{ALERT_TEXT}</Alert>}
         {data && <CardGrid pages={data.pages} />}
         <button
           className="btn btn-primary"
