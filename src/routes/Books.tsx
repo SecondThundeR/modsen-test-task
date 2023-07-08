@@ -56,18 +56,20 @@ export function Books() {
         <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
         {resultsCount === 0 && <Alert>{ALERT_TEXT}</Alert>}
         {data && <CardGrid pages={data.pages} />}
-        <button
-          className="btn btn-primary"
-          disabled={!hasNextPage || isFetchingNextPage}
-          onClick={() => {
-            const updatedSearchParams = new URLSearchParams(searchParams.toString());
-            updatedSearchParams.set("page", String(Number(currentPage) + 1));
-            setSearchParams(updatedSearchParams.toString());
-            fetchNextPage();
-          }}
-        >
-          {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
-        </button>
+        {resultsCount !== 0 && (
+          <button
+            className="btn btn-primary"
+            disabled={!hasNextPage || isFetchingNextPage}
+            onClick={() => {
+              const updatedSearchParams = new URLSearchParams(searchParams.toString());
+              updatedSearchParams.set("page", String(Number(currentPage) + 1));
+              setSearchParams(updatedSearchParams.toString());
+              fetchNextPage();
+            }}
+          >
+            {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+          </button>
+        )}
       </div>
     </>
   );
