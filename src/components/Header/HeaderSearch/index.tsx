@@ -9,7 +9,7 @@ export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
 
   useEffect(() => {
     if (defaultValue) setIsEmpty(false);
-  }, []);
+  }, [defaultValue]);
 
   return (
     <div className="join w-full">
