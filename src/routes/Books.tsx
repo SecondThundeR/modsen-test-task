@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useInfiniteQuery, useQueryClient } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { CardGrid } from "../components/CardGrid";
