@@ -28,7 +28,7 @@ export function BookDetails() {
 
   return (
     <div className="flex flex-col lg:flex-row w-full h-full">
-      <div className="flex justify-center items-center bg-base-200 p-6 w-full lg:w-3/6 rounded-xl">
+      <div className="flex justify-center items-center bg-base-200 p-8 sm:p-8 xl:p-16 w-full lg:w-3/6 rounded-xl">
         <DetailsCover {...volumeInfo} />
       </div>
       <div className="flex flex-col gap-4 p-6 w-full lg:w-3/6">
