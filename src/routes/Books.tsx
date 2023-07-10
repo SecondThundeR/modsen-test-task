@@ -45,35 +45,33 @@ export function Books() {
     };
   }, [searchQuery, selectedCategory, selectedSort]);
 
+  if (isError) return <AlertError error={error} />;
+
   if (isLoading || (!isFetchingNextPage && isRefetching)) return <Spinner />;
 
   return (
     <>
-      <div className="flex flex-col gap-4 items-center w-full p-4">
-        {isError ? (
-          <AlertError error={error} />
-        ) : (
-          data && (
-            <>
-              <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
-              {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
-              <CardGrid pages={data.pages} />
-              {resultsCount !== 0 && (
-                <button
-                  className="btn btn-primary"
-                  disabled={!hasNextPage || isFetchingNextPage}
-                  onClick={() => {
-                    const updatedSearchParams = new URLSearchParams(searchParams.toString());
-                    updatedSearchParams.set("page", String(Number(currentPage) + 1));
-                    setSearchParams(updatedSearchParams.toString());
-                    fetchNextPage();
-                  }}
-                >
-                  {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
-                </button>
-              )}
-            </>
-          )
+      <div className="flex flex-col gap-4 items-center w-full">
+        {data && (
+          <>
+            <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
+            {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
+            <CardGrid pages={data.pages} />
+            {resultsCount !== 0 && (
+              <button
+                className="btn btn-primary"
+                disabled={!hasNextPage || isFetchingNextPage}
+                onClick={() => {
+                  const updatedSearchParams = new URLSearchParams(searchParams.toString());
+                  updatedSearchParams.set("page", String(Number(currentPage) + 1));
+                  setSearchParams(updatedSearchParams.toString());
+                  fetchNextPage();
+                }}
+              >
+                {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+              </button>
+            )}
+          </>
         )}
       </div>
     </>
