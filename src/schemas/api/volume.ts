@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { AccessInfoSchema, SaleInfoSchema } from "./volumes";
 
 const VolumeInfoSchema = z.object({
   title: z.string().nullish(),
@@ -20,6 +21,12 @@ const VolumeInfoSchema = z.object({
     image: z.boolean(),
   }),
   pageCount: z.number().nullish(),
+  printedPageCount: z.number().nullish(),
+  dimensions: z.object({
+    height: z.string(),
+    width: z.string(),
+    thickness: z.string(),
+  }),
   printType: z.string(),
   categories: z.array(z.string()).nullish(),
   averageRating: z.number().nullish(),
@@ -37,6 +44,10 @@ const VolumeInfoSchema = z.object({
     .object({
       smallThumbnail: z.string(),
       thumbnail: z.string(),
+      small: z.string(),
+      medium: z.string(),
+      large: z.string(),
+      extraLarge: z.string().nullish(),
     })
     .nullish(),
   language: z.string(),
@@ -45,48 +56,23 @@ const VolumeInfoSchema = z.object({
   canonicalVolumeLink: z.string(),
 });
 
-export const SaleInfoSchema = z.object({
-  country: z.string(),
-  saleability: z.string(),
-  isEbook: z.boolean(),
+const LayerInfoSchema = z.object({
+  layers: z.array(
+    z.object({
+      layerId: z.string(),
+      volumeAnnotationsVersion: z.string(),
+    }),
+  ),
 });
 
-export const AccessInfoSchema = z.object({
-  country: z.string(),
-  viewability: z.string(),
-  embeddable: z.boolean(),
-  publicDomain: z.boolean(),
-  textToSpeechPermission: z.string(),
-  epub: z.object({
-    isAvailable: z.boolean(),
-  }),
-  pdf: z.object({
-    isAvailable: z.boolean(),
-  }),
-  webReaderLink: z.string(),
-  accessViewStatus: z.string(),
-  quoteSharingAllowed: z.boolean(),
-});
-
-const SearchInfoSchema = z.object({
-  textSnippet: z.string(),
-});
-
-const VolumesItemSchema = z.object({
+export const VolumeSchema = z.object({
   kind: z.string(),
-  id: z.string(),
   etag: z.string(),
   selfLink: z.string(),
-  volumeInfo: VolumeInfoSchema.nullish(),
+  volumeInfo: VolumeInfoSchema,
+  layerInfo: LayerInfoSchema.nullish(),
   saleInfo: SaleInfoSchema,
   accessInfo: AccessInfoSchema,
-  searchInfo: SearchInfoSchema.nullish(),
 });
 
-export const VolumesSchema = z.object({
-  kind: z.string().nullish(),
-  totalItems: z.number().nullish(),
-  items: VolumesItemSchema.array().nullish(),
-});
-
-export type VolumesType = z.infer<typeof VolumesSchema>;
+export type VolumeType = z.infer<typeof VolumeSchema>;
