@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { AlertError, AlertInfo } from "../components/Alert";
@@ -13,7 +13,6 @@ import { fetchBooks } from "../services/api/fetchBooks";
 export function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const searchQuery = searchParams.get("q");
   const selectedCategory = searchParams.get("category");
@@ -21,12 +20,13 @@ export function Books() {
   const currentPage = searchParams.get("page");
   const isMissingParameters = !searchQuery || !selectedCategory || !selectedSort || !currentPage;
 
-  const { data, error, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage, refetch } =
+  const { data, error, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
-      queryKey: ["books"],
+      queryKey: ["books", searchQuery, selectedCategory, selectedSort],
       queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
       getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
       enabled: !isMissingParameters,
+      refetchOnMount: false,
     });
 
   // Idk, but Google Books API returns different "totalItems" on pagination
@@ -36,14 +36,6 @@ export function Books() {
   useEffect(() => {
     if (isMissingParameters) navigate("/");
   }, []);
-
-  useEffect(() => {
-    refetch();
-
-    return () => {
-      queryClient.cancelQueries({ queryKey: ["books"] });
-    };
-  }, [searchQuery, selectedCategory, selectedSort]);
 
   if (isError) return <AlertError error={error} />;
 
