@@ -35,7 +35,7 @@ export function Books() {
 
   useEffect(() => {
     if (isMissingParameters) navigate("/");
-  }, []);
+  }, [isMissingParameters, navigate]);
 
   if (isError) return <AlertError error={error} />;
 
