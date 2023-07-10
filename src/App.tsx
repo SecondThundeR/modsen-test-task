@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/named
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
