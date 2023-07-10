@@ -50,7 +50,7 @@ export function Root() {
           </Header.SelectWrapper>
         </Header.ControlsWrapper>
       </Header>
-      <div className="p-4 flex flex-col items-center gap-4 w-full flex-grow">
+      <div className="flex flex-col items-center gap-4 w-full flex-grow">
         <Outlet />
       </div>
     </div>
