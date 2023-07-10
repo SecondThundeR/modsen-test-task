@@ -10,8 +10,6 @@ import { ALERT_TEXT } from "../constants/alertText";
 
 import { fetchBooks } from "../services/api/fetchBooks";
 
-import { extractErrorMessage } from "../utils/errorMessage";
-
 export function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -53,27 +51,29 @@ export function Books() {
     <>
       <div className="flex flex-col gap-4 items-center w-full p-4">
         {isError ? (
-          <AlertError>Something wrong happened! Error details: {extractErrorMessage(error)}</AlertError>
+          <AlertError error={error} />
         ) : (
-          <>
-            <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
-            {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
-            <CardGrid pages={data.pages} />
-            {resultsCount !== 0 && (
-              <button
-                className="btn btn-primary"
-                disabled={!hasNextPage || isFetchingNextPage}
-                onClick={() => {
-                  const updatedSearchParams = new URLSearchParams(searchParams.toString());
-                  updatedSearchParams.set("page", String(Number(currentPage) + 1));
-                  setSearchParams(updatedSearchParams.toString());
-                  fetchNextPage();
-                }}
-              >
-                {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
-              </button>
-            )}
-          </>
+          data && (
+            <>
+              <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
+              {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
+              <CardGrid pages={data.pages} />
+              {resultsCount !== 0 && (
+                <button
+                  className="btn btn-primary"
+                  disabled={!hasNextPage || isFetchingNextPage}
+                  onClick={() => {
+                    const updatedSearchParams = new URLSearchParams(searchParams.toString());
+                    updatedSearchParams.set("page", String(Number(currentPage) + 1));
+                    setSearchParams(updatedSearchParams.toString());
+                    fetchNextPage();
+                  }}
+                >
+                  {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+                </button>
+              )}
+            </>
+          )
         )}
       </div>
     </>
