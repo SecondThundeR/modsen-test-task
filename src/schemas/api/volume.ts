@@ -44,11 +44,11 @@ const VolumeInfoSchema = z.object({
     .nullish(),
   imageLinks: z
     .object({
-      smallThumbnail: z.string(),
-      thumbnail: z.string(),
-      small: z.string(),
-      medium: z.string(),
-      large: z.string(),
+      smallThumbnail: z.string().nullish(),
+      thumbnail: z.string().nullish(),
+      small: z.string().nullish(),
+      medium: z.string().nullish(),
+      large: z.string().nullish(),
       extraLarge: z.string().nullish(),
     })
     .nullish(),
