@@ -28,12 +28,16 @@ export function BookDetails() {
   return (
     <div className="flex flex-col lg:flex-row w-full h-full">
       <div className="flex justify-center items-center bg-base-200 p-6 w-full lg:w-3/6 rounded-xl">
-        <img
-          className="h-[320px] sm:h-[512px] lg:h-[640px] aspect-auto"
-          srcSet={`${volumeInfo.imageLinks?.small} 1x, ${volumeInfo.imageLinks?.medium} 2x, ${volumeInfo.imageLinks?.large} 3x`}
-          src={volumeInfo.imageLinks?.large}
-          alt={`${volumeInfo.title} cover`}
-        />
+        {volumeInfo.imageLinks ? (
+          <img
+            className="h-[320px] sm:h-[512px] lg:h-[640px] aspect-auto"
+            srcSet={`${volumeInfo.imageLinks.small} 1x, ${volumeInfo.imageLinks.medium} 2x, ${volumeInfo.imageLinks.large} 3x`}
+            src={volumeInfo.imageLinks.large}
+            alt={`${volumeInfo.title} cover`}
+          />
+        ) : (
+          <h1 className="text-lg sm:text-xl text-center">No cover {volumeInfo.title && `for "${volumeInfo.title}"`}</h1>
+        )}
       </div>
       <div className="flex flex-col gap-4 p-6 w-full lg:w-3/6">
         <div className="flex flex-col gap-2">
