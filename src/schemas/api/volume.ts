@@ -22,11 +22,13 @@ const VolumeInfoSchema = z.object({
   }),
   pageCount: z.number().nullish(),
   printedPageCount: z.number().nullish(),
-  dimensions: z.object({
-    height: z.string(),
-    width: z.string(),
-    thickness: z.string(),
-  }),
+  dimensions: z
+    .object({
+      height: z.string(),
+      width: z.string(),
+      thickness: z.string(),
+    })
+    .nullish(),
   printType: z.string(),
   categories: z.array(z.string()).nullish(),
   averageRating: z.number().nullish(),
