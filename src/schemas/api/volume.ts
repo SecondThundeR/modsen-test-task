@@ -26,7 +26,7 @@ const VolumeInfoSchema = z.object({
     .object({
       height: z.string(),
       width: z.string(),
-      thickness: z.string(),
+      thickness: z.string().nullish(),
     })
     .nullish(),
   printType: z.string(),
