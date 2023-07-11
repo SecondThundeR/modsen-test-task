@@ -83,6 +83,8 @@ const VolumesItemSchema = z.object({
   searchInfo: SearchInfoSchema.nullish(),
 });
 
+export type VolumesItemType = z.infer<typeof VolumesItemSchema>;
+
 export const VolumesSchema = z.object({
   kind: z.string().nullish(),
   totalItems: z.number().nullish(),
