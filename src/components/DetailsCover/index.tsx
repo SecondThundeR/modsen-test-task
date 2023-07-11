@@ -1,4 +1,5 @@
 import { useState } from "react";
+import cn from "classnames";
 
 import { Spinner } from "@/components/Spinner";
 
@@ -14,10 +15,19 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
 
   return (
     <>
-      <div className={`flex justify-center ${loading ? "block" : "hidden"}`}>
+      <div
+        className={cn("flex justify-center", {
+          hidden: !loading,
+        })}
+      >
         <Spinner />
       </div>
-      <picture className={`drop-shadow-2xl ${loading ? "hidden" : "block"}`} onLoad={() => setLoading(false)}>
+      <picture
+        className={cn("drop-shadow-2xl", {
+          hidden: loading,
+        })}
+        onLoad={() => setLoading(false)}
+      >
         <source srcSet={imageLinks.medium} media="(min-width: 768px) and (max-width: 1199px)" />
         <source srcSet={imageLinks.large} media="(min-width: 1200px)" />
         <img src={imageLinks.small} alt={title ? `${title} cover` : ""} />
