@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLAttributes, useEffect, useState } from "react";
+import { ChangeEvent, HTMLAttributes, useCallback, useEffect, useState } from "react";
 
 type UseIsEmptyOptions = Pick<HTMLAttributes<HTMLInputElement>, "defaultValue">;
 
@@ -10,10 +10,13 @@ export function useIsEmpty(options: UseIsEmptyOptions) {
     if (defaultValue) setIsEmpty(false);
   }, [defaultValue]);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) setIsEmpty(false);
-    else setIsEmpty(true);
-  };
+  const onChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.value) setIsEmpty(false);
+      else setIsEmpty(true);
+    },
+    [setIsEmpty],
+  );
 
   return { isEmpty, onChange };
 }
