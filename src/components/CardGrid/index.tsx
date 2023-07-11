@@ -1,6 +1,6 @@
 import { BookCard } from "../BookCard";
 
-import { VolumesType } from "../../schemas/api/volumes";
+import { VolumesType } from "@/schemas/api/volumes";
 
 interface CardGridProps {
   pages: VolumesType[] | undefined;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { VolumeSchema } from "../../schemas/api/volume";
+import { VolumeSchema } from "@/schemas/api/volume";
 
 export const fetchBook = async (id: string | undefined) => {
   if (!id) throw new Error("No ID provided");

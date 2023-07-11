@@ -1,4 +1,4 @@
-import { OptionItemArrayType } from "../schemas/optionItem";
+import { OptionItemArrayType } from "@/schemas/optionItem";
 
 export const CATEGORIES = [
   {

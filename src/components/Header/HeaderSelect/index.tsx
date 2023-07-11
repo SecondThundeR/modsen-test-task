@@ -1,5 +1,6 @@
 import { HTMLAttributes } from "react";
-import { OptionItemArrayType } from "../../../schemas/optionItem";
+
+import { OptionItemArrayType } from "@/schemas/optionItem";
 
 interface HeaderSelectProps extends Pick<HTMLAttributes<HTMLSelectElement>, "defaultValue"> {
   name: string;

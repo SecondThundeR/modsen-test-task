@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { InformationCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 
-import { extractErrorMessage } from "../../utils/errorMessage";
+import { extractErrorMessage } from "@/utils/errorMessage";
 
 export function AlertError({ error }: { error: unknown }) {
   return (

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { Spinner } from "../Spinner";
+import { Spinner } from "@/components/Spinner";
 
-import { VolumeType } from "../../schemas/api/volume";
+import { VolumeType } from "@/schemas/api/volume";
 
 export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
   const [loading, setLoading] = useState(true);
@@ -20,7 +20,7 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
       <picture className={`drop-shadow-2xl ${loading ? "hidden" : "block"}`} onLoad={() => setLoading(false)}>
         <source srcSet={imageLinks.medium} media="(min-width: 768px) and (max-width: 1199px)" />
         <source srcSet={imageLinks.large} media="(min-width: 1200px)" />
-        <img src={imageLinks.small} alt={`${title} cover`} />
+        <img src={imageLinks.small} alt={title ? `${title} cover` : ""} />
       </picture>
     </>
   );

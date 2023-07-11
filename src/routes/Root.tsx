@@ -1,12 +1,13 @@
 import { FormEvent } from "react";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
-import { Header } from "../components/Header";
+import { Header } from "@/components/Header";
 
-import { CATEGORIES } from "../constants/categories";
-import { DEFAULT_SEARCH_PARAMETERS } from "../constants/defaultSearchParams";
-import { SORTING } from "../constants/sorting";
-import { useIsLoading } from "../hooks/useIsLoading";
+import { CATEGORIES } from "@/constants/categories";
+import { DEFAULT_SEARCH_PARAMETERS } from "@/constants/defaultSearchParams";
+import { SORTING } from "@/constants/sorting";
+
+import { useIsLoading } from "@/hooks/useIsLoading";
 
 const DEFAULT_CATEGORY = DEFAULT_SEARCH_PARAMETERS["category"];
 const DEFAULT_SORT = DEFAULT_SEARCH_PARAMETERS["sorting"];

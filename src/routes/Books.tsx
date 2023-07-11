@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import { AlertError, AlertInfo } from "../components/Alert";
-import { CardGrid } from "../components/CardGrid";
-import { Spinner } from "../components/Spinner";
+import { AlertError, AlertInfo } from "@/components/Alert";
+import { CardGrid } from "@/components/CardGrid";
+import { Spinner } from "@/components/Spinner";
 
-import { ALERT_TEXT } from "../constants/alertText";
+import { ALERT_TEXT } from "@/constants/alertText";
 
-import { fetchBooks } from "../services/api/fetchBooks";
+import { fetchBooks } from "@/services/api/fetchBooks";
 
 export function Books() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,11 +23,18 @@ export function Books() {
   const { data, error, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["books", searchQuery, selectedCategory, selectedSort],
-      queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
+      queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam as string),
       getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
       enabled: !isMissingParameters,
       refetchOnMount: false,
     });
+
+  const onClick = async () => {
+    const updatedSearchParams = new URLSearchParams(searchParams.toString());
+    updatedSearchParams.set("page", String(Number(currentPage) + 1));
+    setSearchParams(updatedSearchParams.toString());
+    await fetchNextPage();
+  };
 
   // Idk, but Google Books API returns different "totalItems" on pagination
   // Returning latest result for now
@@ -50,16 +57,7 @@ export function Books() {
             {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
             <CardGrid pages={data.pages} />
             {resultsCount !== 0 && (
-              <button
-                className="btn btn-primary"
-                disabled={!hasNextPage || isFetchingNextPage}
-                onClick={() => {
-                  const updatedSearchParams = new URLSearchParams(searchParams.toString());
-                  updatedSearchParams.set("page", String(Number(currentPage) + 1));
-                  setSearchParams(updatedSearchParams.toString());
-                  fetchNextPage();
-                }}
-              >
+              <button className="btn btn-primary" disabled={!hasNextPage || isFetchingNextPage} onClick={onClick}>
                 {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
               </button>
             )}
