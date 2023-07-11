@@ -14,13 +14,10 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
 
   return (
     <>
-      <div className={`flex justify-center min-h-[461px] ${loading ? "block" : "hidden"}`}>
+      <div className={`flex justify-center ${loading ? "block" : "hidden"}`}>
         <Spinner />
       </div>
-      <picture
-        className={`drop-shadow-2xl min-h-[461px] ${loading ? "hidden" : "block"}`}
-        onLoad={() => setLoading(false)}
-      >
+      <picture className={`drop-shadow-2xl ${loading ? "hidden" : "block"}`} onLoad={() => setLoading(false)}>
         <source srcSet={imageLinks.medium} media="(min-width: 768px) and (max-width: 1199px)" />
         <source srcSet={imageLinks.large} media="(min-width: 1200px)" />
         <img src={imageLinks.small} alt={`${title} cover`} />
