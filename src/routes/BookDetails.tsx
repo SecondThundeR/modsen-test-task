@@ -37,10 +37,9 @@ export function BookDetails() {
           <h1 className="text-2xl font-bold">{volumeInfo.title}</h1>
           <p className="link link-primary opacity-70">{volumeInfo.authors?.join(", ")}</p>
         </div>
-        <div
-          className="border-2 border-base-200 p-5"
-          dangerouslySetInnerHTML={{ __html: volumeInfo.description || "" }}
-        />
+        {volumeInfo.description && (
+          <div className="border-2 border-base-200 p-5" dangerouslySetInnerHTML={{ __html: volumeInfo.description }} />
+        )}
       </div>
     </div>
   );
