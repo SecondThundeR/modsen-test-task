@@ -1,5 +1,8 @@
 import { useEffect } from "react";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  type QueryFunctionContext,
+  useInfiniteQuery,
+} from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import { AlertError, AlertInfo } from "@/components/Alert";
@@ -19,7 +22,6 @@ export function Books() {
     incrementPageParam,
   } = useBooksParams();
   const navigate = useNavigate();
-
   const {
     data,
     error,
@@ -31,13 +33,8 @@ export function Books() {
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ["books", searchQuery, selectedCategory, selectedSort],
-    queryFn: ({ pageParam }) =>
-      fetchBooks(
-        searchQuery,
-        selectedCategory,
-        selectedSort,
-        pageParam as string,
-      ),
+    queryFn: ({ pageParam }: QueryFunctionContext<(string | null)[], string>) =>
+      fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam),
     getNextPageParam: ({ items }) =>
       !items ? null : (Number(currentPage) || 0) + 1,
     enabled: !isMissingParams,
@@ -53,10 +50,13 @@ export function Books() {
     await fetchNextPage();
   };
 
-  // Idk, but Google Books API returns different "totalItems" on pagination
-  // Returning latest result for now
+  /*
+   * Idk, but Google Books API returns different "totalItems" on pagination
+   * Returning latest result count for now
+   */
   const resultsCount =
     data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
+  const isResultsCountEmpty = resultsCount === 0;
 
   if (isError) return <AlertError error={error} />;
 
@@ -70,9 +70,9 @@ export function Books() {
             <h1 className="font-medium opacity-50">
               Found {resultsCount} results
             </h1>
-            {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
+            {isResultsCountEmpty && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
             <CardGrid pages={data.pages} />
-            {resultsCount !== 0 && (
+            {!isResultsCountEmpty && (
               <button
                 className="btn btn-primary"
                 disabled={!hasNextPage || isFetchingNextPage}
