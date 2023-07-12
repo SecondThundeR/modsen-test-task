@@ -22,7 +22,8 @@ export function BookDetails() {
 
   if (isLoading) return <Spinner />;
 
-  if (!data || isObjectEmpty(data)) return <AlertInfo>API returned nothing :c</AlertInfo>;
+  if (!data || isObjectEmpty(data))
+    return <AlertInfo>API returned nothing :c</AlertInfo>;
 
   const { volumeInfo } = data;
 
@@ -35,10 +36,15 @@ export function BookDetails() {
         <div className="flex flex-col gap-2">
           <p className="opacity-60">{volumeInfo.categories?.at(0)}</p>
           <h1 className="text-2xl font-bold">{volumeInfo.title}</h1>
-          <p className="link link-primary opacity-70">{volumeInfo.authors?.join(", ")}</p>
+          <p className="link link-primary opacity-70">
+            {volumeInfo.authors?.join(", ")}
+          </p>
         </div>
         {volumeInfo.description && (
-          <div className="border-2 border-base-200 p-5" dangerouslySetInnerHTML={{ __html: volumeInfo.description }} />
+          <div
+            className="border-2 border-base-200 p-5"
+            dangerouslySetInnerHTML={{ __html: volumeInfo.description }}
+          />
         )}
       </div>
     </div>

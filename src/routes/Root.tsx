@@ -17,10 +17,23 @@ export function Root() {
       <Header>
         <Header.Title>Search for books</Header.Title>
         <Header.ControlsWrapper onSubmit={onSubmit}>
-          <Header.Search defaultValue={searchParam} isLoading={isBooksLoading} />
+          <Header.Search
+            defaultValue={searchParam}
+            isLoading={isBooksLoading}
+          />
           <Header.SelectWrapper>
-            <Header.Select name="categories" label="Categories" options={CATEGORIES} defaultValue={categoryParam} />
-            <Header.Select name="sort" label="Sorting by" options={SORTING} defaultValue={sortParam} />
+            <Header.Select
+              name="categories"
+              label="Categories"
+              options={CATEGORIES}
+              defaultValue={categoryParam}
+            />
+            <Header.Select
+              name="sort"
+              label="Sorting by"
+              options={SORTING}
+              defaultValue={sortParam}
+            />
           </Header.SelectWrapper>
         </Header.ControlsWrapper>
       </Header>

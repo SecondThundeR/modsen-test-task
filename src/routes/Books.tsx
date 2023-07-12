@@ -20,14 +20,29 @@ export function Books() {
   } = useBooksParams();
   const navigate = useNavigate();
 
-  const { data, error, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useInfiniteQuery({
-      queryKey: ["books", searchQuery, selectedCategory, selectedSort],
-      queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam as string),
-      getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
-      enabled: !isMissingParams,
-      refetchOnMount: false,
-    });
+  const {
+    data,
+    error,
+    isError,
+    isLoading,
+    isRefetching,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["books", searchQuery, selectedCategory, selectedSort],
+    queryFn: ({ pageParam }) =>
+      fetchBooks(
+        searchQuery,
+        selectedCategory,
+        selectedSort,
+        pageParam as string,
+      ),
+    getNextPageParam: ({ items }) =>
+      !items ? null : (Number(currentPage) || 0) + 1,
+    enabled: !isMissingParams,
+    refetchOnMount: false,
+  });
 
   useEffect(() => {
     if (isMissingParams) navigate("/");
@@ -40,7 +55,8 @@ export function Books() {
 
   // Idk, but Google Books API returns different "totalItems" on pagination
   // Returning latest result for now
-  const resultsCount = data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
+  const resultsCount =
+    data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
 
   if (isError) return <AlertError error={error} />;
 
@@ -51,12 +67,22 @@ export function Books() {
       <div className="flex flex-col gap-4 items-center w-full">
         {data && (
           <>
-            <h1 className="font-medium opacity-50">Found {resultsCount} results</h1>
+            <h1 className="font-medium opacity-50">
+              Found {resultsCount} results
+            </h1>
             {resultsCount === 0 && <AlertInfo>{ALERT_TEXT}</AlertInfo>}
             <CardGrid pages={data.pages} />
             {resultsCount !== 0 && (
-              <button className="btn btn-primary" disabled={!hasNextPage || isFetchingNextPage} onClick={onClick}>
-                {isFetchingNextPage ? "Loading more..." : hasNextPage ? "Load More" : "Nothing more to load"}
+              <button
+                className="btn btn-primary"
+                disabled={!hasNextPage || isFetchingNextPage}
+                onClick={onClick}
+              >
+                {isFetchingNextPage
+                  ? "Loading more..."
+                  : hasNextPage
+                  ? "Load More"
+                  : "Nothing more to load"}
               </button>
             )}
           </>

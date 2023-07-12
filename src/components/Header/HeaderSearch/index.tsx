@@ -2,7 +2,8 @@ import { HTMLAttributes } from "react";
 
 import { useIsEmpty } from "@/hooks/useIsEmpty";
 
-interface HeaderSearchProps extends Pick<HTMLAttributes<HTMLInputElement>, "defaultValue"> {
+interface HeaderSearchProps
+  extends Pick<HTMLAttributes<HTMLInputElement>, "defaultValue"> {
   isLoading: boolean;
 }
 
@@ -20,7 +21,11 @@ export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
         placeholder="Enter book name"
         defaultValue={defaultValue}
       />
-      <button type="submit" className="btn btn-primary join-item" disabled={isEmpty || isLoading}>
+      <button
+        type="submit"
+        className="btn btn-primary join-item"
+        disabled={isEmpty || isLoading}
+      >
         Search
       </button>
     </div>

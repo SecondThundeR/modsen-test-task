@@ -24,7 +24,11 @@ export function BookCard(item: VolumesItemType) {
       to={`/books/${bookId}`}
       className="min-h-16 w-72 aspect-auto rounded-xl bg-base-200 flex flex-col gap-4 px-4 py-6 items-center duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
-      {smallThumbnail ? <img className="w-36 h-52 shadow-2xl" src={smallThumbnail} /> : <EmptyCover />}
+      {smallThumbnail ? (
+        <img className="w-36 h-52 shadow-2xl" src={smallThumbnail} />
+      ) : (
+        <EmptyCover />
+      )}
       <div className="flex flex-col items-start w-full gap-1">
         <p className="link link-primary">{firstCategory}</p>
         <h1 className="font-bold text-xl line-clamp-1">{title}</h1>

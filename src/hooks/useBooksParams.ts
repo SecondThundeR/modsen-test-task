@@ -8,7 +8,8 @@ export function useBooksParams() {
   const selectedCategory = searchParams.get("category");
   const selectedSort = searchParams.get("sort");
   const currentPage = searchParams.get("page");
-  const isMissingParams = !searchQuery || !selectedCategory || !selectedSort || !currentPage;
+  const isMissingParams =
+    !searchQuery || !selectedCategory || !selectedSort || !currentPage;
 
   const incrementPageParam = useCallback(() => {
     const updatedSearchParams = new URLSearchParams(searchParams.toString());
