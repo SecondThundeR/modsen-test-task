@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 
 export function useOnLoad() {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const onLoad = useCallback(() => setLoading(false), [setLoading]);
+  const onLoad = useCallback(() => setIsLoading(false), [setIsLoading]);
 
-  return { loading, onLoad };
+  return { isLoading, onLoad };
 }
