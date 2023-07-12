@@ -9,7 +9,9 @@ import { useIsLoading } from "@/hooks/useIsLoading";
 import { useHeaderSearch } from "@/hooks/useHeaderSearch";
 
 export function Root() {
-  const { searchParam, categoryParam, sortParam, onSubmit } = useHeaderSearch();
+  const { searchParam, categoryParam, sortParam, onSubmit } = useHeaderSearch({
+    queryKey: ["books"],
+  });
   const isBooksLoading = useIsLoading(["books"]);
 
   return (
