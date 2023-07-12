@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { AccessInfoSchema, SaleInfoSchema } from "./volumes";
 
-const VolumeInfoSchema = z.object({
+const VolumeFullInfoSchema = z.object({
   title: z.string().nullish(),
   subtitle: z.string().nullish(),
   authors: z.array(z.string()).nullish(),
@@ -58,6 +58,8 @@ const VolumeInfoSchema = z.object({
   canonicalVolumeLink: z.string(),
 });
 
+export type VolumeFullInfoType = z.infer<typeof VolumeFullInfoSchema>;
+
 const LayerInfoSchema = z.object({
   layers: z.array(
     z.object({
@@ -71,7 +73,7 @@ export const VolumeSchema = z.object({
   kind: z.string(),
   etag: z.string(),
   selfLink: z.string(),
-  volumeInfo: VolumeInfoSchema,
+  volumeInfo: VolumeFullInfoSchema,
   layerInfo: LayerInfoSchema.nullish(),
   saleInfo: SaleInfoSchema,
   accessInfo: AccessInfoSchema,
