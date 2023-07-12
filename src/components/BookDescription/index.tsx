@@ -1,10 +1,10 @@
 import { VolumeFullInfoType } from "@/schemas/api/volume";
 
-export function BookDescription({
-  description,
-}: {
+interface BookDescriptionProps {
   description: VolumeFullInfoType["description"];
-}) {
+}
+
+export function BookDescription({ description }: BookDescriptionProps) {
   if (!description) return null;
 
   return (
