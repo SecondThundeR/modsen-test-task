@@ -9,7 +9,7 @@ export function BookDescription({ description }: BookDescriptionProps) {
 
   return (
     <div
-      className="border-2 border-base-200 p-5"
+      className="border-2 border-base-content p-5"
       dangerouslySetInnerHTML={{ __html: description }}
     />
   );
