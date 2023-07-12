@@ -17,15 +17,15 @@ export function BookCard(item: VolumesItemType) {
   const bookId = item.id;
   const firstCategory = categories?.[0];
   const authorsInfo = authors?.join(", ");
-  const smallThumbnail = imageLinks?.smallThumbnail;
+  const thumbnail = imageLinks?.thumbnail;
 
   return (
     <Link
       to={`/books/${bookId}`}
       className="min-h-16 flex aspect-auto w-72 flex-col items-center gap-4 rounded-xl bg-base-200 px-4 py-6 duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
-      {smallThumbnail ? (
-        <img className="h-52 w-36 shadow-2xl" src={smallThumbnail} />
+      {thumbnail ? (
+        <img className="h-52 w-36 shadow-2xl" src={thumbnail} />
       ) : (
         <EmptyCover />
       )}
