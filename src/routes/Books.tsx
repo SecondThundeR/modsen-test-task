@@ -64,7 +64,7 @@ export function Books() {
 
   return (
     <>
-      <div className="flex flex-col gap-4 items-center w-full">
+      <div className="flex w-full flex-col items-center gap-4">
         {data && (
           <>
             <h1 className="font-medium opacity-50">
@@ -74,7 +74,7 @@ export function Books() {
             <CardGrid pages={data.pages} />
             {!isResultsCountEmpty && (
               <button
-                className="btn btn-primary"
+                className="btn-primary btn"
                 disabled={!hasNextPage || isFetchingNextPage}
                 onClick={onClick}
               >

@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 export function NotFound() {
   return (
-    <div className="flex flex-col gap-5 justify-center items-center h-screen">
+    <div className="flex h-screen flex-col items-center justify-center gap-5">
       <h1 className="text-xl">Seems like you lost your path?</h1>
       <Link to="/">
-        <button className="btn btn-primary">Go to home page</button>
+        <button className="btn-primary btn">Go to home page</button>
       </Link>
     </div>
   );

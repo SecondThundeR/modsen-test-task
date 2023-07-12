@@ -13,7 +13,7 @@ export function Root() {
   const isBooksLoading = useIsLoading(["books"]);
 
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex h-screen flex-col">
       <Header>
         <Header.Title>Search for books</Header.Title>
         <Header.ControlsWrapper onSubmit={onSubmit}>
@@ -37,7 +37,7 @@ export function Root() {
           </Header.SelectWrapper>
         </Header.ControlsWrapper>
       </Header>
-      <div className="flex flex-col items-center gap-4 w-full flex-grow p-4">
+      <div className="flex w-full flex-grow flex-col items-center gap-4 p-4">
         <Outlet />
       </div>
     </div>

@@ -12,7 +12,7 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
 
   if (!imageLinks?.small || !imageLinks.medium || !imageLinks.large)
     return (
-      <h1 className="text-xl sm:text-2xl text-center">
+      <h1 className="text-center text-xl sm:text-2xl">
         No cover {title && `for "${title}"`}
       </h1>
     );

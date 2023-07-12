@@ -17,13 +17,13 @@ export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
         name="q"
         type="text"
         onChange={onChange}
-        className="input input-bordered join-item w-full"
+        className="input-bordered input join-item w-full"
         placeholder="Enter book name"
         defaultValue={defaultValue}
       />
       <button
         type="submit"
-        className="btn btn-primary join-item"
+        className="btn-primary join-item btn"
         disabled={isEmpty || isLoading}
       >
         Search

@@ -23,7 +23,7 @@ export function HeaderSelect({
       <select
         id={name}
         name={name}
-        className="select select-bordered"
+        className="select-bordered select"
         defaultValue={defaultValue}
       >
         {options.map((option) => (

@@ -9,7 +9,7 @@ export function HeaderControlsWrapper({
   onSubmit,
 }: HeaderControlsWrapperProps) {
   return (
-    <div className="flex flex-col sm:w-3/5 gap-2">
+    <div className="flex flex-col gap-2 sm:w-3/5">
       <form onSubmit={onSubmit}>{children}</form>
     </div>
   );

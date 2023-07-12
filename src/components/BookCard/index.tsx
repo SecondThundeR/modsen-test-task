@@ -4,8 +4,8 @@ import { VolumesItemType } from "@/schemas/api/volumes";
 
 function EmptyCover() {
   return (
-    <div className="w-36 h-52 bg-base-content flex items-center justify-center shadow-2xl">
-      <h1 className="text-base-300 text-xl">No cover</h1>
+    <div className="flex h-52 w-36 items-center justify-center bg-base-content shadow-2xl">
+      <h1 className="text-xl text-base-300">No cover</h1>
     </div>
   );
 }
@@ -22,17 +22,17 @@ export function BookCard(item: VolumesItemType) {
   return (
     <Link
       to={`/books/${bookId}`}
-      className="min-h-16 w-72 aspect-auto rounded-xl bg-base-200 flex flex-col gap-4 px-4 py-6 items-center duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
+      className="min-h-16 flex aspect-auto w-72 flex-col items-center gap-4 rounded-xl bg-base-200 px-4 py-6 duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
       {smallThumbnail ? (
-        <img className="w-36 h-52 shadow-2xl" src={smallThumbnail} />
+        <img className="h-52 w-36 shadow-2xl" src={smallThumbnail} />
       ) : (
         <EmptyCover />
       )}
-      <div className="flex flex-col items-start w-full gap-1">
-        <p className="link link-primary">{firstCategory}</p>
-        <h1 className="font-bold text-xl line-clamp-1">{title}</h1>
-        <p className="opacity-50 line-clamp-2">{authorsInfo}</p>
+      <div className="flex w-full flex-col items-start gap-1">
+        <p className="link-primary link">{firstCategory}</p>
+        <h1 className="line-clamp-1 text-xl font-bold">{title}</h1>
+        <p className="line-clamp-2 opacity-50">{authorsInfo}</p>
       </div>
     </Link>
   );

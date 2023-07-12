@@ -5,6 +5,7 @@ const config = {
   semi: true,
   printWidth: 80,
   bracketSpacing: true,
+  plugins: [require("prettier-plugin-tailwindcss")],
 };
 
 module.exports = config;

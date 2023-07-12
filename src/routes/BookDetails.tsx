@@ -32,15 +32,15 @@ export function BookDetails() {
   const authors = volumeInfo.authors?.join(", ");
 
   return (
-    <div className="flex flex-col lg:flex-row w-full h-full">
-      <div className="flex justify-center items-center bg-base-200 p-8 sm:p-8 xl:p-16 w-full lg:w-3/6 rounded-xl">
+    <div className="flex h-full w-full flex-col lg:flex-row">
+      <div className="flex w-full items-center justify-center rounded-xl bg-base-200 p-8 sm:p-8 lg:w-3/6 xl:p-16">
         <DetailsCover {...volumeInfo} />
       </div>
-      <div className="flex flex-col gap-4 p-6 w-full lg:w-3/6">
+      <div className="flex w-full flex-col gap-4 p-6 lg:w-3/6">
         <div className="flex flex-col gap-2">
           <p className="opacity-60">{category}</p>
           <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="link link-primary opacity-70">{authors}</p>
+          <p className="link-primary link opacity-70">{authors}</p>
         </div>
         <BookDescription description={description} />
       </div>
