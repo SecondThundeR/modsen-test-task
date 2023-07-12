@@ -10,7 +10,7 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
   const { loading, onLoad } = useOnLoad();
   const { title, imageLinks } = props;
 
-  if (!imageLinks || !imageLinks.small || !imageLinks.medium || !imageLinks.large)
+  if (!imageLinks?.small || !imageLinks.medium || !imageLinks.large)
     return <h1 className="text-xl sm:text-2xl text-center">No cover {title && `for "${title}"`}</h1>;
 
   return (

@@ -38,7 +38,7 @@ export function Books() {
 
   // Idk, but Google Books API returns different "totalItems" on pagination
   // Returning latest result for now
-  const resultsCount = data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) || 0;
+  const resultsCount = data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
 
   useEffect(() => {
     if (isMissingParameters) navigate("/");

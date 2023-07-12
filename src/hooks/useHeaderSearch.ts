@@ -3,16 +3,16 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { DEFAULT_SEARCH_PARAMETERS } from "@/constants/defaultSearchParams";
 
-const DEFAULT_CATEGORY = DEFAULT_SEARCH_PARAMETERS["category"];
-const DEFAULT_SORT = DEFAULT_SEARCH_PARAMETERS["sorting"];
+const DEFAULT_CATEGORY = DEFAULT_SEARCH_PARAMETERS.category;
+const DEFAULT_SORT = DEFAULT_SEARCH_PARAMETERS.sorting;
 
 export function useHeaderSearch() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const searchParam = searchParams.get("q") || "";
-  const categoryParam = searchParams.get("category") || DEFAULT_CATEGORY;
-  const sortParam = searchParams.get("sort") || DEFAULT_SORT;
+  const searchParam = searchParams.get("q") ?? "";
+  const categoryParam = searchParams.get("category") ?? DEFAULT_CATEGORY;
+  const sortParam = searchParams.get("sort") ?? DEFAULT_SORT;
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
