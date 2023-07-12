@@ -20,7 +20,7 @@ const VolumeInfoSchema = z.object({
     image: z.boolean(),
   }),
   pageCount: z.number().nullish(),
-  printType: z.string(),
+  printType: z.string().nullish(),
   categories: z.array(z.string()).nullish(),
   averageRating: z.number().nullish(),
   ratingsCount: z.number().nullish(),

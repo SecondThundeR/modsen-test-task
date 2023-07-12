@@ -29,7 +29,7 @@ const VolumeFullInfoSchema = z.object({
       thickness: z.string().nullish(),
     })
     .nullish(),
-  printType: z.string(),
+  printType: z.string().nullish(),
   categories: z.array(z.string()).nullish(),
   averageRating: z.number().nullish(),
   ratingsCount: z.number().nullish(),
