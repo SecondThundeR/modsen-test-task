@@ -1,4 +1,4 @@
-import { BookCard } from "../BookCard";
+import { BookCard } from "@/components/BookCard";
 
 import { VolumesType } from "@/schemas/api/volumes";
 
