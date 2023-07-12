@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AlertError, AlertInfo } from "@/components/Alert";
 import { CardGrid } from "@/components/CardGrid";
@@ -8,41 +8,39 @@ import { Spinner } from "@/components/Spinner";
 
 import { ALERT_TEXT } from "@/constants/alertText";
 
+import { useBooksParams } from "@/hooks/useBooksParams";
+
 import { fetchBooks } from "@/services/api/fetchBooks";
 
 export function Books() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const {
+    params: { searchQuery, selectedCategory, selectedSort, currentPage },
+    isMissingParams,
+    incrementPageParam,
+  } = useBooksParams();
   const navigate = useNavigate();
-
-  const searchQuery = searchParams.get("q");
-  const selectedCategory = searchParams.get("category");
-  const selectedSort = searchParams.get("sort");
-  const currentPage = searchParams.get("page");
-  const isMissingParameters = !searchQuery || !selectedCategory || !selectedSort || !currentPage;
 
   const { data, error, isError, isLoading, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useInfiniteQuery({
       queryKey: ["books", searchQuery, selectedCategory, selectedSort],
       queryFn: ({ pageParam }) => fetchBooks(searchQuery, selectedCategory, selectedSort, pageParam as string),
       getNextPageParam: ({ items }) => (!items ? null : (Number(currentPage) || 0) + 1),
-      enabled: !isMissingParameters,
+      enabled: !isMissingParams,
       refetchOnMount: false,
     });
 
+  useEffect(() => {
+    if (isMissingParams) navigate("/");
+  }, [isMissingParams, navigate]);
+
   const onClick = async () => {
-    const updatedSearchParams = new URLSearchParams(searchParams.toString());
-    updatedSearchParams.set("page", String(Number(currentPage) + 1));
-    setSearchParams(updatedSearchParams.toString());
+    incrementPageParam();
     await fetchNextPage();
   };
 
   // Idk, but Google Books API returns different "totalItems" on pagination
   // Returning latest result for now
   const resultsCount = data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
-
-  useEffect(() => {
-    if (isMissingParameters) navigate("/");
-  }, [isMissingParameters, navigate]);
 
   if (isError) return <AlertError error={error} />;
 
