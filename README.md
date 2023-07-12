@@ -30,3 +30,15 @@
 
 ![image](./assets/js-react.png)
 ![image](./assets/js-react1.png)
+
+### Текущий вид приложения
+
+#### Экран поиска
+
+![Search Page](./assets/search-page.png)
+![Search Page (Phone)](./assets/search-page-phone.png)
+
+#### Экран книги
+
+![Book Page](./assets/book-page.png)
+![Book Page (Phone)](./assets/book-page-phone.png)
