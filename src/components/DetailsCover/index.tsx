@@ -1,13 +1,13 @@
 import cn from "classnames";
 
-import { Spinner } from "@/components/Spinner";
+import { CoverLoader } from "@/components/CoverLoader";
 
 import { useOnLoad } from "@/hooks/useOnLoad";
 
 import { VolumeType } from "@/schemas/api/volume";
 
 export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
-  const { loading, onLoad } = useOnLoad();
+  const { isLoading, onLoad } = useOnLoad();
   const { title, imageLinks } = props;
 
   if (!imageLinks?.small || !imageLinks.medium || !imageLinks.large)
@@ -18,17 +18,10 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
     );
 
   return (
-    <>
-      <div
-        className={cn("flex justify-center", {
-          hidden: !loading,
-        })}
-      >
-        <Spinner />
-      </div>
+    <CoverLoader isLoading={isLoading}>
       <picture
         className={cn("drop-shadow-2xl", {
-          hidden: loading,
+          hidden: isLoading,
         })}
         onLoad={onLoad}
       >
@@ -39,6 +32,6 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
         <source srcSet={imageLinks.large} media="(min-width: 1200px)" />
         <img src={imageLinks.small} alt={title ? `${title} cover` : ""} />
       </picture>
-    </>
+    </CoverLoader>
   );
 };

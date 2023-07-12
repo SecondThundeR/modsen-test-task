@@ -1,4 +1,9 @@
 import { Link } from "react-router-dom";
+import cn from "classnames";
+
+import { CoverLoader } from "@/components/CoverLoader";
+
+import { useOnLoad } from "@/hooks/useOnLoad";
 
 import { VolumesItemType } from "@/schemas/api/volumes";
 
@@ -11,6 +16,7 @@ function EmptyCover() {
 }
 
 export function BookCard(item: VolumesItemType) {
+  const { isLoading, onLoad } = useOnLoad();
   if (!item.volumeInfo) return null;
 
   const { imageLinks, title, categories, authors } = item.volumeInfo;
@@ -25,7 +31,15 @@ export function BookCard(item: VolumesItemType) {
       className="min-h-16 flex aspect-auto w-72 flex-col items-center gap-4 rounded-xl bg-base-200 px-4 py-6 duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
       {thumbnail ? (
-        <img className="h-52 w-36 shadow-2xl" src={thumbnail} />
+        <CoverLoader isLoading={isLoading} classNames="h-52">
+          <img
+            className={cn("h-52 w-36 shadow-2xl", {
+              hidden: isLoading,
+            })}
+            src={thumbnail}
+            onLoad={onLoad}
+          />
+        </CoverLoader>
       ) : (
         <EmptyCover />
       )}
