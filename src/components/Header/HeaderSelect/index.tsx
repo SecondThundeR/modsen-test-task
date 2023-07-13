@@ -26,11 +26,14 @@ export function HeaderSelect({
         className="select-bordered select"
         defaultValue={defaultValue}
       >
-        {options.map((option) => (
-          <option key={option.id} value={option.value}>
-            {option.title}
-          </option>
-        ))}
+        {options.map((option) => {
+          const { id, value, title } = option;
+          return (
+            <option key={id} value={value}>
+              {title}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

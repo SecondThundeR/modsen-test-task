@@ -4,11 +4,12 @@ import { CoverLoader } from "@/components/CoverLoader";
 
 import { useOnLoad } from "@/hooks/useOnLoad";
 
-import { VolumeType } from "@/schemas/api/volume";
+import { VolumeInfoType } from "@/schemas/api/volume";
 
-export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
+type DetailsCoverProps = Pick<VolumeInfoType, "title" | "imageLinks">;
+
+export const DetailsCover = ({ title, imageLinks }: DetailsCoverProps) => {
   const { isLoading, onLoad } = useOnLoad();
-  const { title, imageLinks } = props;
 
   if (!imageLinks?.small || !imageLinks.medium || !imageLinks.large)
     return (

@@ -27,21 +27,21 @@ export function BookDetails() {
   if (!data || isObjectEmpty(data))
     return <AlertInfo>API returned nothing :c</AlertInfo>;
 
-  const { volumeInfo } = data;
-  const { title, description } = volumeInfo;
-  const category = volumeInfo.categories?.at(0);
-  const authors = volumeInfo.authors?.join(", ");
+  const { title, authors, categories, description, imageLinks } =
+    data.volumeInfo;
+  const category = categories?.at(0);
+  const authorsInfo = authors?.join(", ");
 
   return (
     <div className="flex h-full w-full flex-col lg:flex-row">
       <div className="flex w-full items-center justify-center rounded-xl bg-base-200 p-8 sm:p-8 lg:w-3/6 xl:p-16">
-        <DetailsCover {...volumeInfo} />
+        <DetailsCover title={title} imageLinks={imageLinks} />
       </div>
       <div className="flex w-full flex-col gap-4 p-6 lg:w-3/6">
         <div className="flex flex-col gap-2">
           <p className="opacity-60">{category}</p>
           <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="link-primary link opacity-70">{authors}</p>
+          <p className="link-primary link opacity-70">{authorsInfo}</p>
         </div>
         <BookDescription description={description} />
       </div>

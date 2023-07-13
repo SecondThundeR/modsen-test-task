@@ -3,7 +3,7 @@ import { BookCard } from "@/components/BookCard";
 import { VolumesType } from "@/schemas/api/volumes";
 
 interface CardGridProps {
-  pages: VolumesType[] | undefined;
+  pages: VolumesType[];
 }
 
 export function CardGrid({ pages }: CardGridProps) {
@@ -11,9 +11,11 @@ export function CardGrid({ pages }: CardGridProps) {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-      {itemsArray?.map(
-        (item) => item && <BookCard key={item.etag} {...item} />,
-      )}
+      {itemsArray?.map((item) => {
+        if (!item) return null;
+        const { id, etag, volumeInfo } = item;
+        return <BookCard key={etag} id={id} {...volumeInfo} />;
+      })}
     </div>
   );
 }

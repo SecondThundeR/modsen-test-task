@@ -2,32 +2,27 @@ import { Link } from "react-router-dom";
 import cn from "classnames";
 
 import { CoverLoader } from "@/components/CoverLoader";
+import { EmptyCover } from "@/components/EmptyCover";
 
 import { useOnLoad } from "@/hooks/useOnLoad";
 
 import { VolumesItemType } from "@/schemas/api/volumes";
 
-function EmptyCover() {
-  return (
-    <div className="flex h-52 w-36 items-center justify-center bg-base-content shadow-2xl">
-      <h1 className="text-xl text-base-300">No cover</h1>
-    </div>
-  );
-}
+type BookCardProps = Pick<VolumesItemType, "id" | "volumeInfo">;
 
-export function BookCard(item: VolumesItemType) {
+export function BookCard({ id, volumeInfo }: BookCardProps) {
   const { isLoading, onLoad } = useOnLoad();
-  if (!item.volumeInfo) return null;
 
-  const { imageLinks, title, categories, authors } = item.volumeInfo;
-  const bookId = item.id;
+  if (!volumeInfo) return null;
+
+  const { imageLinks, title, categories, authors } = volumeInfo;
   const category = categories?.[0];
   const authorsInfo = authors?.join(", ");
   const thumbnail = imageLinks?.thumbnail;
 
   return (
     <Link
-      to={`/books/${bookId}`}
+      to={`/books/${id}`}
       className="min-h-16 flex aspect-auto w-72 flex-col items-center gap-4 rounded-xl bg-base-200 px-4 py-6 duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
       {thumbnail ? (

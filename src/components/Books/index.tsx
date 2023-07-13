@@ -51,6 +51,10 @@ export function Books() {
     await fetchNextPage();
   };
 
+  if (isError) return <AlertError error={error} />;
+
+  if (isLoading || (!isFetchingNextPage && isRefetching)) return <Spinner />;
+
   /*
    * Idk, but Google Books API returns different "totalItems" on pagination
    * Returning latest result count for now
@@ -58,10 +62,6 @@ export function Books() {
   const resultsCount =
     data?.pages.flatMap(({ totalItems }) => totalItems).at(-1) ?? 0;
   const isResultsCountEmpty = resultsCount === 0;
-
-  if (isError) return <AlertError error={error} />;
-
-  if (isLoading || (!isFetchingNextPage && isRefetching)) return <Spinner />;
 
   return (
     <>

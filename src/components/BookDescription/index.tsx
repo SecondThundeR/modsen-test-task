@@ -1,8 +1,6 @@
 import { VolumeInfoType } from "@/schemas/api/volume";
 
-interface BookDescriptionProps {
-  description: VolumeInfoType["description"];
-}
+type BookDescriptionProps = Pick<VolumeInfoType, "description">;
 
 export function BookDescription({ description }: BookDescriptionProps) {
   if (!description) return null;
