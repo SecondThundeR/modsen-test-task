@@ -21,7 +21,7 @@ export function BookCard(item: VolumesItemType) {
 
   const { imageLinks, title, categories, authors } = item.volumeInfo;
   const bookId = item.id;
-  const firstCategory = categories?.[0];
+  const category = categories?.[0];
   const authorsInfo = authors?.join(", ");
   const thumbnail = imageLinks?.thumbnail;
 
@@ -46,7 +46,7 @@ export function BookCard(item: VolumesItemType) {
         <EmptyCover />
       )}
       <div className="flex w-full flex-col items-start gap-1">
-        <p className="link-primary link">{firstCategory}</p>
+        <p className="link-primary link">{category}</p>
         <h1 className="line-clamp-1 text-xl font-bold">{title}</h1>
         <p className="line-clamp-2 opacity-50">{authorsInfo}</p>
       </div>
