@@ -2,7 +2,7 @@ import { useRouteError } from "react-router-dom";
 
 import { extractErrorMessage } from "@/utils/extractErrorMessage";
 
-export function Error() {
+export function ErrorBoundary() {
   const error = useRouteError();
   console.error(error);
 
