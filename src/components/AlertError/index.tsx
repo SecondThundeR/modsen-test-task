@@ -11,7 +11,7 @@ interface AlertErrorProps {
 export const AlertError = memo(function AlertError({ error }: AlertErrorProps) {
   return (
     <div className="alert alert-error sm:w-3/5 lg:w-2/5 xl:w-2/6">
-      <ExclamationCircleIcon />
+      <ExclamationCircleIcon className="h-6 w-6 shrink-0 stroke-current" />
       <span>
         Something wrong happened! Error details: {extractErrorMessage(error)}
       </span>
