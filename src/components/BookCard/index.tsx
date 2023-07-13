@@ -4,6 +4,8 @@ import cn from "classnames";
 import { CoverLoader } from "@/components/CoverLoader";
 import { EmptyCover } from "@/components/EmptyCover";
 
+import { ROUTES } from "@/constants/routes";
+
 import { useOnLoad } from "@/hooks/useOnLoad";
 
 import { VolumesItemType } from "@/schemas/api/volumes";
@@ -22,7 +24,7 @@ export function BookCard({ id, volumeInfo }: BookCardProps) {
 
   return (
     <Link
-      to={`/books/${id}`}
+      to={`/${ROUTES.books}/${id}`}
       className="min-h-16 flex aspect-auto w-72 flex-col items-center gap-4 rounded-xl bg-base-200 px-4 py-6 duration-[350ms] ease-in-out hover:-translate-y-3 hover:drop-shadow-xl"
     >
       {thumbnail ? (

@@ -7,28 +7,30 @@ import { NotFound } from "@/components/NotFound";
 import { Root } from "@/components/Root";
 import { RootHint } from "@/components/RootHint";
 
+import { ROUTES } from "@/constants/routes";
+
 export const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTES.home,
     element: <Root />,
     errorElement: <ErrorBoundary />,
     children: [
       {
-        path: "/",
+        path: ROUTES.home,
         element: <RootHint />,
       },
       {
-        path: "books",
+        path: ROUTES.books,
         element: <Books />,
       },
       {
-        path: "books/:id",
+        path: ROUTES.bookDetails,
         element: <BookDetails />,
       },
     ],
   },
   {
-    path: "*",
+    path: ROUTES.all,
     element: <NotFound />,
   },
 ]);

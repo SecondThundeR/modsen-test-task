@@ -11,6 +11,7 @@ import { CardGrid } from "@/components/CardGrid";
 import { Spinner } from "@/components/Spinner";
 
 import { ALERT_TEXT } from "@/constants/alertText";
+import { ROUTES } from "@/constants/routes";
 
 import { useBooksParams } from "@/hooks/useBooksParams";
 
@@ -43,7 +44,7 @@ export function Books() {
   });
 
   useEffect(() => {
-    if (isMissingParams) navigate("/");
+    if (isMissingParams) navigate(ROUTES.home);
   }, [isMissingParams, navigate]);
 
   const onClick = async () => {
