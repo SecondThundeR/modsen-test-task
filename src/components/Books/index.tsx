@@ -5,7 +5,8 @@ import {
 } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
-import { AlertError, AlertInfo } from "@/components/Alert";
+import { AlertError } from "@/components/AlertError";
+import { AlertInfo } from "@/components/AlertInfo";
 import { CardGrid } from "@/components/CardGrid";
 import { Spinner } from "@/components/Spinner";
 

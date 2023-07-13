@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
-import { AlertError, AlertInfo } from "@/components/Alert";
+import { AlertError } from "@/components/AlertError";
+import { AlertInfo } from "@/components/AlertInfo";
 import { BookDescription } from "@/components/BookDescription";
 import { DetailsCover } from "@/components/DetailsCover";
 import { Spinner } from "@/components/Spinner";
