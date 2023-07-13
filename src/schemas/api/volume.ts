@@ -4,6 +4,7 @@ import { VolumesInfoSchema } from "@/schemas/api/volumes";
 
 export const VolumeInfoSchema = VolumesInfoSchema.merge(
   z.object({
+    description: z.string().nullish(),
     imageLinks: z
       .object({
         smallThumbnail: z.string().nullish(),
