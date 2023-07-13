@@ -17,6 +17,8 @@ import { useBooksParams } from "@/hooks/useBooksParams";
 
 import { fetchBooks } from "@/services/api/fetchBooks";
 
+import { getPaginatorText } from "@/utils/getPaginatorText";
+
 export function Books() {
   const {
     params: { searchQuery, selectedCategory, selectedSort, currentPage },
@@ -80,11 +82,7 @@ export function Books() {
                 disabled={!hasNextPage || isFetchingNextPage}
                 onClick={onClick}
               >
-                {isFetchingNextPage
-                  ? "Loading more..."
-                  : hasNextPage
-                  ? "Load More"
-                  : "Nothing more to load"}
+                {getPaginatorText(isFetchingNextPage, hasNextPage)}
               </button>
             )}
           </>
