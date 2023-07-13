@@ -1,4 +1,4 @@
-import { OptionItemArrayType } from "@/schemas/optionItem";
+import { OptionItem } from "@/types/optionItem";
 
 export const SORTING = [
   {
@@ -11,4 +11,4 @@ export const SORTING = [
     value: "newest",
     title: "Newest",
   },
-] satisfies OptionItemArrayType;
+] satisfies OptionItem[];

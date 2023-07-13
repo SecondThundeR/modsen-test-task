@@ -1,4 +1,4 @@
-import { OptionItemArrayType } from "@/schemas/optionItem";
+import { OptionItem } from "@/types/optionItem";
 
 export const CATEGORIES = [
   {
@@ -36,4 +36,4 @@ export const CATEGORIES = [
     value: "poetry",
     title: "Poetry",
   },
-] satisfies OptionItemArrayType;
+] satisfies OptionItem[];

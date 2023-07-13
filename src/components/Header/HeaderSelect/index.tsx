@@ -1,12 +1,12 @@
 import { HTMLAttributes } from "react";
 
-import { OptionItemArrayType } from "@/schemas/optionItem";
+import { OptionItem } from "@/types/optionItem";
 
 interface HeaderSelectProps
   extends Pick<HTMLAttributes<HTMLSelectElement>, "defaultValue"> {
   name: string;
   label: string;
-  options: OptionItemArrayType;
+  options: OptionItem[];
 }
 
 export function HeaderSelect({
