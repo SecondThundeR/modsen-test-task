@@ -1,4 +1,7 @@
-module.exports = {
+/**
+ * @type {import("eslint").Linter.Config}
+ */
+const config = {
   env: {
     browser: true,
     es2020: true,
@@ -44,7 +47,7 @@ module.exports = {
     ],
     "react/react-in-jsx-scope": "off",
     "react-refresh/only-export-components": "warn",
-    "import/named": 1,
+    "import/named": 0,
     "@typescript-eslint/no-misused-promises": [
       "error",
       {
@@ -53,3 +56,5 @@ module.exports = {
     ],
   },
 };
+
+module.exports = config;
