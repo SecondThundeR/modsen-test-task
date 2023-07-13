@@ -38,6 +38,8 @@ export function BookCard(item: VolumesItemType) {
             })}
             src={thumbnail}
             onLoad={onLoad}
+            title={title ?? ""}
+            alt={title ? `${title} cover` : ""}
           />
         </CoverLoader>
       ) : (

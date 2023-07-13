@@ -30,7 +30,11 @@ export const DetailsCover = (props: VolumeType["volumeInfo"]) => {
           media="(min-width: 768px) and (max-width: 1199px)"
         />
         <source srcSet={imageLinks.large} media="(min-width: 1200px)" />
-        <img src={imageLinks.small} alt={title ? `${title} cover` : ""} />
+        <img
+          src={imageLinks.small}
+          title={title ?? ""}
+          alt={title ? `${title} cover` : ""}
+        />
       </picture>
     </CoverLoader>
   );
