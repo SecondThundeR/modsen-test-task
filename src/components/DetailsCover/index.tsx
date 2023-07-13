@@ -1,3 +1,4 @@
+import { memo } from "react";
 import cn from "classnames";
 
 import { CoverLoader } from "@/components/CoverLoader";
@@ -8,7 +9,10 @@ import { VolumeInfoType } from "@/schemas/api/volume";
 
 type DetailsCoverProps = Pick<VolumeInfoType, "title" | "imageLinks">;
 
-export const DetailsCover = ({ title, imageLinks }: DetailsCoverProps) => {
+export const DetailsCover = memo(function DetailsCover({
+  title,
+  imageLinks,
+}: DetailsCoverProps) {
   const { isLoading, onLoad } = useOnLoad();
 
   if (!imageLinks?.small || !imageLinks.medium || !imageLinks.large)
@@ -39,4 +43,4 @@ export const DetailsCover = ({ title, imageLinks }: DetailsCoverProps) => {
       </picture>
     </CoverLoader>
   );
-};
+});

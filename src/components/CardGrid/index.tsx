@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { BookCard } from "@/components/BookCard";
 
 import { VolumesType } from "@/schemas/api/volumes";
@@ -6,7 +7,7 @@ interface CardGridProps {
   pages: VolumesType[];
 }
 
-export function CardGrid({ pages }: CardGridProps) {
+export const CardGrid = memo(function CardGrid({ pages }: CardGridProps) {
   const itemsArray = pages?.flatMap(({ items }) => items);
 
   return (
@@ -18,4 +19,4 @@ export function CardGrid({ pages }: CardGridProps) {
       })}
     </div>
   );
-}
+});

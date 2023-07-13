@@ -1,8 +1,11 @@
+import { memo } from "react";
 import { VolumeInfoType } from "@/schemas/api/volume";
 
 type BookDescriptionProps = Pick<VolumeInfoType, "description">;
 
-export function BookDescription({ description }: BookDescriptionProps) {
+export const BookDescription = memo(function BookDescription({
+  description,
+}: BookDescriptionProps) {
   if (!description) return null;
 
   return (
@@ -11,4 +14,4 @@ export function BookDescription({ description }: BookDescriptionProps) {
       dangerouslySetInnerHTML={{ __html: description }}
     />
   );
-}
+});

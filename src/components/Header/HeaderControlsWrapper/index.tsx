@@ -1,10 +1,10 @@
-import { HTMLAttributes, PropsWithChildren } from "react";
+import { HTMLAttributes, PropsWithChildren, memo } from "react";
 
 interface HeaderControlsWrapperProps
   extends PropsWithChildren,
     Pick<HTMLAttributes<HTMLFormElement>, "onSubmit"> {}
 
-export function HeaderControlsWrapper({
+export const HeaderControlsWrapper = memo(function HeaderControlsWrapper({
   children,
   onSubmit,
 }: HeaderControlsWrapperProps) {
@@ -13,4 +13,4 @@ export function HeaderControlsWrapper({
       <form onSubmit={onSubmit}>{children}</form>
     </div>
   );
-}
+});

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 
@@ -12,7 +13,10 @@ import { VolumesItemType } from "@/schemas/api/volumes";
 
 type BookCardProps = Pick<VolumesItemType, "id" | "volumeInfo">;
 
-export function BookCard({ id, volumeInfo }: BookCardProps) {
+export const BookCard = memo(function BookCard({
+  id,
+  volumeInfo,
+}: BookCardProps) {
   const { isLoading, onLoad } = useOnLoad();
 
   if (!volumeInfo) return null;
@@ -49,4 +53,4 @@ export function BookCard({ id, volumeInfo }: BookCardProps) {
       </div>
     </Link>
   );
-}
+});

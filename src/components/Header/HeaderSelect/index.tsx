@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 
 import { OptionItem } from "@/types/optionItem";
 
@@ -9,7 +9,7 @@ interface HeaderSelectProps
   options: OptionItem[];
 }
 
-export function HeaderSelect({
+export const HeaderSelect = memo(function HeaderSelect({
   name,
   label,
   options,
@@ -37,4 +37,4 @@ export function HeaderSelect({
       </select>
     </div>
   );
-}
+});

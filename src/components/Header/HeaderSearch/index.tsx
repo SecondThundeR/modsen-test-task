@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, memo } from "react";
 
 import { useIsEmpty } from "@/hooks/useIsEmpty";
 
@@ -7,7 +7,10 @@ interface HeaderSearchProps
   isLoading: boolean;
 }
 
-export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
+export const HeaderSearch = memo(function HeaderSearch({
+  defaultValue,
+  isLoading,
+}: HeaderSearchProps) {
   const { isEmpty, onChange } = useIsEmpty({ defaultValue });
 
   return (
@@ -30,4 +33,4 @@ export function HeaderSearch({ defaultValue, isLoading }: HeaderSearchProps) {
       </button>
     </div>
   );
-}
+});

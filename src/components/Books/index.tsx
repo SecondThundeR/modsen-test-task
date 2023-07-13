@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import {
   type QueryFunctionContext,
   useInfiniteQuery,
@@ -49,10 +49,10 @@ export function Books() {
     if (isMissingParams) navigate(ROUTES.home);
   }, [isMissingParams, navigate]);
 
-  const onClick = async () => {
+  const onClick = useCallback(async () => {
     incrementPageParam();
     await fetchNextPage();
-  };
+  }, [fetchNextPage, incrementPageParam]);
 
   if (isError) return <AlertError error={error} />;
 

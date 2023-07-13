@@ -1,5 +1,7 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, memo } from "react";
 
-export function HeaderSelectWrapper({ children }: PropsWithChildren) {
+export const HeaderSelectWrapper = memo(function HeaderSelectWrapper({
+  children,
+}: PropsWithChildren) {
   return <div className="flex gap-4">{children}</div>;
-}
+});

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, memo } from "react";
 import cn from "classnames";
 
 import { Spinner } from "@/components/Spinner";
@@ -8,7 +8,7 @@ interface CoverLoaderProps extends PropsWithChildren {
   classNames?: string;
 }
 
-export function CoverLoader({
+export const CoverLoader = memo(function CoverLoader({
   children,
   isLoading,
   classNames,
@@ -25,4 +25,4 @@ export function CoverLoader({
       {children}
     </>
   );
-}
+});
