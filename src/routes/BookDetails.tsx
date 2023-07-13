@@ -8,7 +8,7 @@ import { Spinner } from "@/components/Spinner";
 
 import { fetchBook } from "@/services/api/fetchBook";
 
-import { isObjectEmpty } from "@/utils/object";
+import { isObjectEmpty } from "@/utils/isObjectEmpty";
 
 export function BookDetails() {
   const { id } = useParams<{ id: string }>();

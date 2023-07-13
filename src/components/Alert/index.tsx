@@ -4,7 +4,7 @@ import {
   ExclamationCircleIcon,
 } from "@heroicons/react/24/outline";
 
-import { extractErrorMessage } from "@/utils/errorMessage";
+import { extractErrorMessage } from "@/utils/extractErrorMessage";
 
 export function AlertError({ error }: { error: unknown }) {
   return (
